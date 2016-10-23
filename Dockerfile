@@ -59,7 +59,8 @@ RUN R CMD INSTALL `find StanHeaders*.tar.gz`
 ## build/install development version of rstan
 WORKDIR /tmp/build_rstan/rstan/rstan 
 RUN R CMD build rstan --no-build-vignettes
-RUN install.r `find rstan*.tar.gz` --deps=TRUE
+RUN install2.r --error \
+    --deps=TRUE `find rstan*.tar.gz`
 
 ## install dependencies for shinystan
 # RUN install2.r --error \ 
