@@ -6,7 +6,8 @@ MAINTAINER "Eric Novik" eric@stan.fit
 
 RUN apt-get update \ 
 	&& apt-get install -y --no-install-recommends \
-                   libcurl4-openssl-dev
+                   libcurl4-openssl-dev \
+		   libssl-dev
 
 #ENV COMMIT_REF '1a81f57'
 
