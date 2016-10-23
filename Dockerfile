@@ -1,5 +1,5 @@
-FROM rocker/hadleyverse:latest
-MAINTAINER "Jacqueline Buros Novik" jackinovik@gmail.com
+FROM rocker/r-base:latest
+MAINTAINER "Eric Novik" eric@stan.fit
 
 ENV STAN_BRANCH develop 
 ENV STAN_MATH_BRANCH develop
@@ -55,36 +55,27 @@ RUN R CMD build rstan --no-build-vignettes
 RUN R CMD INSTALL `find rstan*.tar.gz`
 
 ## install dependencies for shinystan
-RUN install2.r --error \ 
-    DT \
-    dygraphs \
-    gtools \ 
-    shinyjs \ 
-    shinythemes \ 
-    threejs \ 
-    xts \
-    rsconnect
+# RUN install2.r --error \ 
+#    DT \
+#    dygraphs \
+#    gtools \ 
+#    shinyjs \ 
+#    shinythemes \ 
+#    threejs \ 
+#    xts \
+#    rsconnect
 
 ## build/install development version of shinystan
-WORKDIR /tmp/build_shinystan
-RUN git clone --recursive https://github.com/stan-dev/shinystan.git
-RUN R CMD build shinystan
-RUN R CMD INSTALL `find shinystan_*.tar.gz`
+# WORKDIR /tmp/build_shinystan
+# RUN git clone --recursive https://github.com/stan-dev/shinystan.git
+# RUN R CMD build shinystan
+# RUN R CMD INSTALL `find shinystan_*.tar.gz`
 
 ## install loo
-RUN install2.r --error \
-    loo
-
-## pre-requisite for rstanarm
-RUN install2.r --error \
-	lme4 \
-	HSAUR3
-
-## build/install development version of rstanarm
-WORKDIR /tmp/build_rstanarm
-RUN git clone --recursive https://github.com/stan-dev/rstanarm.git
-RUN R CMD build rstanarm
-RUN R CMD INSTALL `find rstanarm_*.tar.gz`
+WORKDIR /tmp/build_loo
+RUN git clone --recursive https://github.com/stan-dev/loo.git
+RUN R CMD build loo --no-build-vignettes
+RUN R CMD INSTALL `find loo_*.tar.gz`
 
 WORKDIR /home/rstudio
 
