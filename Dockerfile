@@ -36,7 +36,10 @@ RUN install2.r --error \
     RcppEigen \
     RInside \
     RUnit \
-    devtools
+    devtools \
+    ggplot2 \
+    gridExtra \
+    matrixStats
 
 
 ## update Rcpp & Rcppcore to versions in github
@@ -59,8 +62,7 @@ RUN R CMD INSTALL `find StanHeaders*.tar.gz`
 ## build/install development version of rstan
 WORKDIR /tmp/build_rstan/rstan/rstan 
 RUN R CMD build rstan --no-build-vignettes
-RUN install2.r --error \
-    --deps=TRUE `find rstan*.tar.gz`
+RUN R CMD INSTALL `find rstan*.tar.gz`
 
 ## install dependencies for shinystan
 # RUN install2.r --error \ 
