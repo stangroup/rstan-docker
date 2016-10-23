@@ -1,8 +1,13 @@
 FROM rocker/r-base:latest
 MAINTAINER "Eric Novik" eric@stan.fit
 
-ENV STAN_BRANCH develop 
-ENV STAN_MATH_BRANCH develop
+#ENV STAN_BRANCH develop 
+#ENV STAN_MATH_BRANCH develop
+
+RUN apt-get update \ 
+	&& apt-get install -y --no-install-recommends \
+                   libcurl4-openssl-dev
+
 #ENV COMMIT_REF '1a81f57'
 
 # Install clang to use as compiler
